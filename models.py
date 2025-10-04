@@ -7,17 +7,17 @@ from sqlalchemy_utils.types import ChoiceType
 db = create_engine('sqlite:///banco.db')
 
 # cria a base do banco de dados
-base = declarative_base()
+Base = declarative_base()
 
 # cria as classes/tabelas do banco
-class Usuario(base):
+class Usuario(Base):
     __tablename__ = 'usuarios'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True)
     nome = Column('nome', String)
     email = Column('email', String, nullable=False)
     senha = Column('senha', String)
-    ativo = complex('ativo', Boolean)
+    ativo = Column('ativo', Boolean)
     admin = Column('admin', Boolean, default=False)
 
     def __init__(self, nome, email, senha, ativo=True, admin=False):
@@ -28,17 +28,17 @@ class Usuario(base):
         self.admin - admin
 
 
-class Pedido(base):
+class Pedido(Base):
     __tablename__ = 'pedidos'
 
-    STATUS_PEDIDOS = (
-        ('PENDENTE', 'PENDENTE'),
-        ('CANCELADO', 'CANCELADO'),
-        ('FINALIZADO', 'FINALIZADO')
-    )
+    # STATUS_PEDIDOS = (
+    #     ('PENDENTE', 'PENDENTE'),
+    #     ('CANCELADO', 'CANCELADO'),
+    #     ('FINALIZADO', 'FINALIZADO')
+    # )
 
     id = Column('id', Integer, primary_key=True, autoincrement=True)
-    status = Column('status', ChoiceType(choices=STATUS_PEDIDOS)) # pendente, cancelado, finalizado
+    status = Column('status', String) # pendente, cancelado, finalizado
     usuario = Column('usuario', ForeignKey('usuarios.id'))
     preco = Column('preco', Float)
     # #itens = 
@@ -49,7 +49,7 @@ class Pedido(base):
         self.status = status
 
 
-class ItemPedido(base):
+class ItemPedido(Base):
     __tablename__ = 'itens_pedido'
 
     id = Column('id', Integer, primary_key=True, autoincrement=True)
@@ -65,6 +65,5 @@ class ItemPedido(base):
         self.tamanho = tamanho
         self.preco_unitario = preco_unitario
         self.pedido = pedido
-
 
 # executa a criação dos metadados do banco (cria efetivamente o banco de dados)
