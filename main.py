@@ -26,3 +26,7 @@ if __name__ == '__main__':
 # POST -> ENVIAR/CRIAR
 # PUT/PET -> EDIÇÃO
 # DELETE -> DELETAR
+
+# codigo alembic para migraçãpo
+# alembic revision --autogenerate -m "initial migration"
+# alembic upgrade head   
