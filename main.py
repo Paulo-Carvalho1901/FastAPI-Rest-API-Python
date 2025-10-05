@@ -27,6 +27,6 @@ if __name__ == '__main__':
 # PUT/PET -> EDIÇÃO
 # DELETE -> DELETAR
 
-# codigo alembic para migraçãpo
+# codigo alembic para migraçãpo de banco de dados
 # alembic revision --autogenerate -m "initial migration"
 # alembic upgrade head   

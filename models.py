@@ -25,7 +25,7 @@ class Usuario(Base):
         self.email = email
         self.senha = senha
         self.ativo = ativo
-        self.admin - admin
+        self.admin = admin
 
 
 class Pedido(Base):
