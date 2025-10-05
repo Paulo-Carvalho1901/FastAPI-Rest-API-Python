@@ -34,3 +34,17 @@ if __name__ == '__main__':
 # codigo alembic para migraçãpo de banco de dados
 # alembic revision --autogenerate -m "initial migration"
 # alembic upgrade head   
+
+""""
+/app
+│
+├── main.py
+├── routes/
+│   ├── __init__.py
+│   ├── auth_routes.py
+│   └── order_routes.py
+├── core/
+│   ├── config.py
+│   └── security.py
+└── models/
+"""
