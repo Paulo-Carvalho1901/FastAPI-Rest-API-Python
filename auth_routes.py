@@ -27,3 +27,8 @@ async def criar_conta(usuario_schema: UsuarioSchema, session: Session = Depends(
         session.add(novo_usuario)
         session.commit()
         return {'mesagem': f'Usuário cadastrado com sucesso. {usuario_schema.email}'}
+
+
+@auth_router.post('/login')
+async def login(session: Session = Depends(pegar_sessao)):
+    ...

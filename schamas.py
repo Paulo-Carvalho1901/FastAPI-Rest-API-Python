@@ -18,3 +18,10 @@ class PedidoSchema(BaseModel):
 
     class config:
         from_atrribute =True
+
+class LoginSchema(BaseModel):
+    email: str
+    senha: str
+
+    class config:
+        from_atrribute = True
