@@ -6,6 +6,12 @@ from sqlalchemy.orm import Session
 
 from schamas import UsuarioSchema, LoginSchema
 
+
+def criar_token(email):
+    token = f'fnsnsldf47sd{email}'
+    return token
+
+
 auth_router = APIRouter(prefix='/auth', tags=['auth'])
 
 @auth_router.get('/')
@@ -35,4 +41,8 @@ async def login(login_schema: LoginSchema, session: Session = Depends(pegar_sess
     if not usuario:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Usuário não encontrado.')
     else:
-        ...
+        access_token = criar_token(usuario.id)
+        return {
+            'access_token': access_token,
+            'token_type': 'Bearer'    
+        }
