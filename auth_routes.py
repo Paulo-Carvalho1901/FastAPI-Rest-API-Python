@@ -4,7 +4,7 @@ from dependencies import pegar_sessao
 from config import bcrypt_context
 from sqlalchemy.orm import Session
 
-from schamas import UsuarioSchema
+from schamas import UsuarioSchema, LoginSchema
 
 auth_router = APIRouter(prefix='/auth', tags=['auth'])
 
@@ -30,5 +30,9 @@ async def criar_conta(usuario_schema: UsuarioSchema, session: Session = Depends(
 
 
 @auth_router.post('/login')
-async def login(session: Session = Depends(pegar_sessao)):
-    ...
+async def login(login_schema: LoginSchema, session: Session = Depends(pegar_sessao)):
+    usuario = session.query(Usuario).filter(Usuario.email==login_schema.email).first()
+    if not usuario:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Usuário não encontrado.')
+    else:
+        ...
