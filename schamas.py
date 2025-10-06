@@ -11,3 +11,10 @@ class UsuarioSchema(BaseModel):
 
     class Config:
         from_atrribute = True
+
+
+class PedidoSchema(BaseModel):
+    usuario: int
+
+    class config:
+        from_atrribute =True
